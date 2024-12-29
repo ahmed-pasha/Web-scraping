@@ -1,3 +1,5 @@
+Project Title
+A brief description of what this project does and who it's for
 
 ###Selenium Twitter Trending Topics Scraper
 
@@ -39,3 +41,27 @@ The IP address used for this query was 192.168.1.100.
 
 Here's a JSON extract of this record from the MongoDB: { "_id": { "$oid": "6771a3bd65f0c15ae2fe2746" }, "unique_id": "50f49433-a84f-4077-9696-8fdebd9a576e", "trends": [ "#AnnamalaiExposed", "#KajalAggarwal", "#RohitSharma𓃵", "#ProKabaddi" ], "end_time": "2024-12-30 01:02:13", "ip_address": "192.168.1.100" } Notes and Improvements ProxyMesh Setup: Ensure your ProxyMesh credentials are configured in main.py to rotate IP addresses. Error Handling: Includes error messages if MongoDB is unavailable or no records are found. HTML Page Improvements: The IP address defaults to "192.168.1.100" if unavailable.
 
+
+
+## Installation
+
+Install my-project with npm
+
+```bash
+npm install my-project
+cd my-project
+```
+
+## Usage/Examples
+
+```javascript
+import Component from 'my-project'
+
+function App() {
+  return <Component />
+}
+```
+
+## License
+
+[MIT](https://choosealicense.com/licenses/mit/)
