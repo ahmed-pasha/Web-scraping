@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Twitter Trending Topics</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+    <h1>Twitter Trending Topics</h1>
+    <button id="run-script">Click here to run the script</button>
+    <div id="result"></div>
+
+    <script>
+        $("#run-script").click(function () {
+            $("#result").html("Running the script, please wait...");
+            $.get("/run-script", function (response) {
+                if (response.status === "success") {
+                    fetchLatestResults();
+                } else {
+                    $("#result").html("Error: " + response.message);
+                }
+            });
+        });
+
+        function fetchLatestResults() {
+            $.get("/get-latest-results", function (response) {
+                if (response.status === "error") {
+                    $("#result").html("Error: " + response.message);
+                } else {
+                    const { trends, end_time, ip_address, _id } = response;
+                    let html = `<p>These are the most happening topics as on <strong>${end_time}</strong>:</p>`;
+                    html += "<ul>";
+                    trends.forEach((trend, index) => {
+                        html += `<li>${trend}</li>`;
+                    });
+                    html += `</ul><p>The IP address used for this query was <strong>${ip_address}</strong>.</p>`;
+                    html += `<p>Here’s a JSON extract of this record from the MongoDB:</p>`;
+                    html += `<pre>${JSON.stringify(response, null, 2)}</pre>`;
+                    html += `<button id="run-again">Click here to run the query again.</button>`;
+                    $("#result").html(html);
+
+                    $("#run-again").click(function () {
+                        $("#result").html("");
+                        fetchLatestResults();
+                    });
+                }
+            });
+        }
+    </script>
+</body>
+</html>
